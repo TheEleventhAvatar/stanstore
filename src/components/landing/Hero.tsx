@@ -132,7 +132,7 @@ export const Hero = () => {
               
               {/* Mock links/products */}
               <div className="grid gap-3">
-                {["📚 My Digital Course - $49", "🎯 1:1 Coaching Call - $99", "💎 Premium Membership - $19/mo", "🔗 Follow me on Instagram"].map((item, i) => (
+                {["📚 My Digital Course - 499 rs", "🎯 1:1 Coaching Call - 999 rs", "💎 Premium Membership - 199 rs/mo", "🔗 Follow me on Instagram"].map((item, i) => (
                   <div 
                     key={i}
                     className="p-4 rounded-xl bg-card/60 border border-border/50 hover:border-primary/50 hover:bg-card transition-all cursor-pointer"
