@@ -13,6 +13,12 @@ import NotFound from "./pages/NotFound";
 import StorePage from "./pages/StorePage";
 import LinksPage from "./pages/dashboard/LinksPage";
 import ProductsPage from "./pages/dashboard/ProductsPage";
+import DashboardStorePage from "./pages/dashboard/StorePage";
+import MembershipsPage from "./pages/dashboard/MembershipsPage";
+import BookingsPage from "./pages/dashboard/BookingsPage";
+import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
+import PayoutsPage from "./pages/dashboard/PayoutsPage";
+import SettingsPage from "./pages/dashboard/SettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -37,14 +43,14 @@ const App = () => (
             
             {/* Dashboard routes */}
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/store" element={<Dashboard />} />
+            <Route path="/dashboard/store" element={<DashboardStorePage />} />
             <Route path="/dashboard/products" element={<ProductsPage />} />
-            <Route path="/dashboard/memberships" element={<Dashboard />} />
-            <Route path="/dashboard/bookings" element={<Dashboard />} />
+            <Route path="/dashboard/memberships" element={<MembershipsPage />} />
+            <Route path="/dashboard/bookings" element={<BookingsPage />} />
             <Route path="/dashboard/links" element={<LinksPage />} />
-            <Route path="/dashboard/analytics" element={<Dashboard />} />
-            <Route path="/dashboard/payouts" element={<Dashboard />} />
-            <Route path="/dashboard/settings" element={<Dashboard />} />
+            <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
+            <Route path="/dashboard/payouts" element={<PayoutsPage />} />
+            <Route path="/dashboard/settings" element={<SettingsPage />} />
             
             {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
