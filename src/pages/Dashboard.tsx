@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -176,6 +177,8 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
+
+            <Outlet />
 
             {/* Recent Activity / Empty State */}
             <div>

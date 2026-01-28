@@ -42,15 +42,17 @@ const App = () => (
             <Route path="/onboarding" element={<Onboarding />} />
             
             {/* Dashboard routes */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/store" element={<DashboardStorePage />} />
-            <Route path="/dashboard/products" element={<ProductsPage />} />
-            <Route path="/dashboard/memberships" element={<MembershipsPage />} />
-            <Route path="/dashboard/bookings" element={<BookingsPage />} />
-            <Route path="/dashboard/links" element={<LinksPage />} />
-            <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
-            <Route path="/dashboard/payouts" element={<PayoutsPage />} />
-            <Route path="/dashboard/settings" element={<SettingsPage />} />
+           <Route path="/dashboard" element={<Dashboard />}>
+  <Route path="store" element={<DashboardStorePage />} />
+  <Route path="products" element={<ProductsPage />} />
+  <Route path="memberships" element={<MembershipsPage />} />
+  <Route path="bookings" element={<BookingsPage />} />
+  <Route path="links" element={<LinksPage />} />
+  <Route path="analytics" element={<AnalyticsPage />} />
+  <Route path="payouts" element={<PayoutsPage />} />
+  <Route path="settings" element={<SettingsPage />} />
+</Route>
+
             
             {/* Catch-all */}
             <Route path="*" element={<NotFound />} />
