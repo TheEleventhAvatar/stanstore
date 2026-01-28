@@ -136,23 +136,63 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               );
             })}
           </nav>
+        {/*View Store Button */}
+         <Button
+  variant="outline"
+  className="flex items-center gap-2"
+  onClick={async () => {
+    try {
+      let subdomain = store?.subdomain;
 
-          {/* View Store Button */}
-          <div className="px-3 pb-3">
-            <Button
-              variant="outline"
-              className="w-full justify-start gap-2"
-              onClick={() => {
-                if (storeSubdomain) {
-                  window.open(`/s/${storeSubdomain}`, "_blank");
-                }
-              }}
-              disabled={!storeSubdomain}
-            >
-              <ExternalLink className="w-4 h-4" />
-              View my store
-            </Button>
-          </div>
+      // If store doesn't exist, create it
+      if (!subdomain) {
+        const { data, error } = await supabase
+          .from("stores")
+          .insert([
+            {
+              user_id: user!.id,
+              display_name: "My Awesome Store",
+              subdomain: `store-${Math.floor(Math.random() * 10000)}`, // generate unique subdomain
+            },
+          ])
+          .select()
+          .maybeSingle();
+
+        if (error || !data) throw new Error("Failed to create store");
+
+        subdomain = data.subdomain;
+
+        // Update state
+        setStore(data);
+        setFormData({
+          ...formData,
+          display_name: data.display_name,
+          subdomain: data.subdomain,
+        });
+
+        toast({
+          title: "Store Created!",
+          description: "Your store has been created successfully",
+        });
+      }
+
+      // Open the store
+      window.open(`https://${subdomain}.stan.store`, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error",
+        description: "Failed to create or open store",
+        variant: "destructive",
+      });
+    }
+  }}
+>
+  <ExternalLink className="w-4 h-4" />
+  Preview
+</Button>
+
+
 
           {/* User section */}
           <div className="p-4 border-t border-sidebar-border">
