@@ -10,6 +10,9 @@ import Signup from "./pages/Signup";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import StorePage from "./pages/StorePage";
+import LinksPage from "./pages/dashboard/LinksPage";
+import ProductsPage from "./pages/dashboard/ProductsPage";
 
 const queryClient = new QueryClient();
 
@@ -26,16 +29,19 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             
+            {/* Public Store Page */}
+            <Route path="/s/:subdomain" element={<StorePage />} />
+            
             {/* Onboarding */}
             <Route path="/onboarding" element={<Onboarding />} />
             
             {/* Dashboard routes */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/store" element={<Dashboard />} />
-            <Route path="/dashboard/products" element={<Dashboard />} />
+            <Route path="/dashboard/products" element={<ProductsPage />} />
             <Route path="/dashboard/memberships" element={<Dashboard />} />
             <Route path="/dashboard/bookings" element={<Dashboard />} />
-            <Route path="/dashboard/links" element={<Dashboard />} />
+            <Route path="/dashboard/links" element={<LinksPage />} />
             <Route path="/dashboard/analytics" element={<Dashboard />} />
             <Route path="/dashboard/payouts" element={<Dashboard />} />
             <Route path="/dashboard/settings" element={<Dashboard />} />
