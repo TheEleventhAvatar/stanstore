@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -16,8 +16,8 @@ import {
   X,
   ExternalLink,
 } from "lucide-react";
-import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -39,6 +39,7 @@ const navItems = [
 
 export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [storeSubdomain, setStoreSubdomain] = useState<string | null>(null);
   const { user, loading, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,6 +49,21 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       navigate("/login");
     }
   }, [user, loading, navigate]);
+
+  useEffect(() => {
+    const fetchStore = async () => {
+      if (!user) return;
+      const { data } = await supabase
+        .from("stores")
+        .select("subdomain")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (data) {
+        setStoreSubdomain(data.subdomain);
+      }
+    };
+    fetchStore();
+  }, [user]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -126,7 +142,12 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <Button
               variant="outline"
               className="w-full justify-start gap-2"
-              onClick={() => window.open("/store-preview", "_blank")}
+              onClick={() => {
+                if (storeSubdomain) {
+                  window.open(`/s/${storeSubdomain}`, "_blank");
+                }
+              }}
+              disabled={!storeSubdomain}
             >
               <ExternalLink className="w-4 h-4" />
               View my store
